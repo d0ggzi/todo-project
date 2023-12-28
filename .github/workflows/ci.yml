@@ -39,6 +39,9 @@ jobs:
         run: cp .env.example .env
       - name: Build docker image
         run: docker-compose build
+      - name: Sleep for 15 seconds
+        run: sleep 15s
+        shell: bash
       - name: Run tests
         run: docker-compose run --rm backend pytest --cov=src --cov-fail-under=95
 
