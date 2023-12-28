@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "hw13"
+version = "0.1.0"
+description = ""
+authors = ["Maksim Laptev <maks-laptev.03@mail.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+uvicorn = "^0.25.0"
+psycopg2-binary = "^2.9.9"
+pydantic = "^2.5.3"
+pydantic-settings = "^2.1.0"
+pyjwt = "^2.8.0"
+bcrypt = "^4.1.2"
+flake8-bandit = "^4.1.1"
+pytest = "^7.4.3"
+pytest-cov = "^4.1.0"
+black = "^23.12.1"
+pyproject-flake8 = "^6.1.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.flake8]
+max-line-length = 95
+
+[tool.coverage.run]
+omit = [
+    "src/web/app.py"
+]

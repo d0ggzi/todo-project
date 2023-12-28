@@ -1,0 +1,44 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:16.1
+    container_name: "postgres_db"
+    volumes:
+      - ./pgdata/:/var/lib/postgresql/data
+      - .:/docker-entrypoint-initdb.d
+    ports:
+      - "15432:5432"
+    restart: always
+    env_file:
+      - .env
+
+  backend:
+    build:
+      context: .
+      dockerfile: docker/backend/Dockerfile
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - .:/opt/app
+    environment:
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/frontend/Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      - db
+      - backend
+
+volumes:
+  pgdata:
